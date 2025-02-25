@@ -1,16 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.tictactpe.HelloController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox fx:id="root" alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactpe.HelloController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+
+    <!-- Title Text -->
+    <Text fx:id="outcomeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="503.595703125">
+        <font>
+            <Font size="50.0" />
+        </font>
+    </Text>
+
+
+    <!-- Start Button -->
+    <Button layoutY="100.0" onAction="#clickStart" prefHeight="40.0" prefWidth="100.0" text="Start!" />
+   <FlowPane columnHalignment="CENTER" prefHeight="510.0" prefWidth="510.0">
+      <children>
+         <Button fx:id="button1" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button2" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button3" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button4" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button5" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button6" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button7" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button8" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+         <Button fx:id="button9" mnemonicParsing="false" prefHeight="170.0" prefWidth="170.0">
+            <font>
+               <Font size="50.0" />
+            </font>
+         </Button>
+      </children>
+   </FlowPane>
+
+    <!-- Restart Button -->
+    <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="40.0" prefWidth="100.0" text="Restart" />
+
 </VBox>
