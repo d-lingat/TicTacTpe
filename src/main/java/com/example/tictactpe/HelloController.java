@@ -1,15 +1,18 @@
 package com.example.tictactpe;
 
-import javafx.fxml.FXML;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.text.Text;
+import java.lang.foreign.ValueLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class HelloController implements Initializable {
 
@@ -33,6 +36,16 @@ public class HelloController implements Initializable {
     private Button button9;
     @FXML
     private Text outcomeText;
+    @FXML
+    private TextField playerXName; 
+    @FXML
+    private TextField playerOName; 
+    @FXML
+    private VBox scoreBoard;
+
+    private boolean gameFinish;
+
+    private ScoreBoard sb = new ScoreBoard(10);
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
@@ -47,6 +60,9 @@ public class HelloController implements Initializable {
             button.setFocusTraversable(false);
         });
 
+        sb.scoreBoardContainer = scoreBoard;
+
+        
     }
 
     @FXML
@@ -58,7 +74,17 @@ public class HelloController implements Initializable {
     void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
         outcomeText.setText("Tic-Tac-Toe");
+        gameFinish = false;
+    }
 
+    @FXML
+    void playerXChange() {
+       sb.playerX = playerXName.getText(); 
+    }
+    
+    @FXML
+    void playerOChange() {
+       sb.playerO = playerOName.getText(); 
     }
 
     public void resetButton(Button button) {
@@ -88,6 +114,10 @@ public class HelloController implements Initializable {
     }
 
     public void checkGame() {
+        if (gameFinish) {
+            return;
+        }
+
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
 
@@ -105,11 +135,18 @@ public class HelloController implements Initializable {
 
             if (line.equals("XXX")) {
                 outcomeText.setText("X wins!");
+                sb.updateScoreBoard(playerXName.getText());
+                sb.updateScoreboardLabels(true);
+                gameFinish = true;
             } else if (line.equals("OOO")) {
                 outcomeText.setText("O wins!");
+                sb.updateScoreBoard(playerOName.getText());
+                sb.updateScoreboardLabels(true);
+                gameFinish = true;
             }
 
         }
+
 
     }
 
