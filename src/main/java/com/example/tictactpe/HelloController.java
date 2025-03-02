@@ -1,6 +1,5 @@
 package com.example.tictactpe;
 
-import java.lang.foreign.ValueLayout;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +44,7 @@ public class HelloController implements Initializable {
 
     private boolean gameFinish;
 
-    private ScoreBoard sb = new ScoreBoard(10);
+    private ScoreBoard sb = new ScoreBoard(20);
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
@@ -61,8 +60,26 @@ public class HelloController implements Initializable {
         });
 
         sb.scoreBoardContainer = scoreBoard;
+        sb.updateScoreBoard("Test1"); 
+        sb.updateScoreBoard("Test2"); 
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test4"); 
+        sb.updateScoreBoard("Test5"); 
+        sb.updateScoreBoard("Test6"); 
 
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test3"); 
+
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
         
+        sb.updateScoreboardLabels(false); 
     }
 
     @FXML
@@ -79,12 +96,12 @@ public class HelloController implements Initializable {
 
     @FXML
     void playerXChange() {
-       sb.playerX = playerXName.getText(); 
+        return;
     }
     
     @FXML
     void playerOChange() {
-       sb.playerO = playerOName.getText(); 
+        return;
     }
 
     public void resetButton(Button button) {
@@ -109,6 +126,7 @@ public class HelloController implements Initializable {
         } else {
             button.setText("O");
             playerTurn = 0;
+            
         }
 
     }
@@ -136,12 +154,12 @@ public class HelloController implements Initializable {
             if (line.equals("XXX")) {
                 outcomeText.setText("X wins!");
                 sb.updateScoreBoard(playerXName.getText());
-                sb.updateScoreboardLabels(true);
+                sb.updateScoreboardLabels(false);
                 gameFinish = true;
             } else if (line.equals("OOO")) {
                 outcomeText.setText("O wins!");
                 sb.updateScoreBoard(playerOName.getText());
-                sb.updateScoreboardLabels(true);
+                sb.updateScoreboardLabels(false);
                 gameFinish = true;
             }
 
