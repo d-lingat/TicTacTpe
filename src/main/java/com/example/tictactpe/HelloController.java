@@ -1,15 +1,17 @@
 package com.example.tictactpe;
 
-import javafx.fxml.FXML;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class HelloController implements Initializable {
 
@@ -33,6 +35,16 @@ public class HelloController implements Initializable {
     private Button button9;
     @FXML
     private Text outcomeText;
+    @FXML
+    private TextField playerXName; 
+    @FXML
+    private TextField playerOName; 
+    @FXML
+    private VBox scoreBoard;
+
+    private boolean gameFinish;
+
+    private ScoreBoard sb = new ScoreBoard(20);
 
     private int playerTurn = 0;
     ArrayList<Button> buttons;
@@ -47,6 +59,27 @@ public class HelloController implements Initializable {
             button.setFocusTraversable(false);
         });
 
+        sb.scoreBoardContainer = scoreBoard;
+        sb.updateScoreBoard("Test1"); 
+        sb.updateScoreBoard("Test2"); 
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test4"); 
+        sb.updateScoreBoard("Test5"); 
+        sb.updateScoreBoard("Test6"); 
+
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test3"); 
+        sb.updateScoreBoard("Test3"); 
+
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        sb.updateScoreBoard("Test6"); 
+        
+        sb.updateScoreboardLabels(false); 
     }
 
     @FXML
@@ -58,7 +91,17 @@ public class HelloController implements Initializable {
     void restartGame(ActionEvent event) {
         buttons.forEach(this::resetButton);
         outcomeText.setText("Tic-Tac-Toe");
+        gameFinish = false;
+    }
 
+    @FXML
+    void playerXChange() {
+        return;
+    }
+    
+    @FXML
+    void playerOChange() {
+        return;
     }
 
     public void resetButton(Button button) {
@@ -83,11 +126,16 @@ public class HelloController implements Initializable {
         } else {
             button.setText("O");
             playerTurn = 0;
+            
         }
 
     }
 
     public void checkGame() {
+        if (gameFinish) {
+            return;
+        }
+
         for (int a = 0; a < 8; a++) {
             String line = switch (a) {
 
@@ -105,11 +153,18 @@ public class HelloController implements Initializable {
 
             if (line.equals("XXX")) {
                 outcomeText.setText("X wins!");
+                sb.updateScoreBoard(playerXName.getText());
+                sb.updateScoreboardLabels(false);
+                gameFinish = true;
             } else if (line.equals("OOO")) {
                 outcomeText.setText("O wins!");
+                sb.updateScoreBoard(playerOName.getText());
+                sb.updateScoreboardLabels(false);
+                gameFinish = true;
             }
 
         }
+
 
     }
 
