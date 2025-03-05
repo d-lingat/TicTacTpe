@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactpe.HelloController">
+<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactpe.HelloController" stylesheets="@styles.css">
    <items>
       <VBox fx:id="root" alignment="CENTER" spacing="20">
           <padding>
@@ -24,7 +24,7 @@
           </padding>
       
                 <!-- Title Text -->
-          <Text fx:id="outcomeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe" textAlignment="CENTER" wrappingWidth="503.595703125">
+          <Text fx:id="outcomeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic Tac Toe!" textAlignment="CENTER" wrappingWidth="503.595703125">
               <font>
                   <Font size="50.0" />
               </font>
@@ -84,10 +84,10 @@
             
                   
                       <!-- Start Button -->
-                <Button onAction="#clickStart" prefHeight="40.0" prefWidth="100.0" text="Start!" />
+                <Button styleClass="control-button" onAction="#clickStart" prefHeight="40.0" prefWidth="100.0" text="Start!" />
             
                       <!-- Restart Button -->
-                <Button mnemonicParsing="false" onAction="#restartGame" prefHeight="40.0" prefWidth="100.0" text="Restart" />
+                <Button styleClass="control-button" mnemonicParsing="false" onAction="#restartGame" prefHeight="40.0" prefWidth="100.0" text="Restart" />
             </children>
          </HBox>
       

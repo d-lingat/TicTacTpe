@@ -89,9 +89,16 @@ public class HelloController implements Initializable {
 
     @FXML
     void restartGame(ActionEvent event) {
-        buttons.forEach(this::resetButton);
-        outcomeText.setText("Tic-Tac-Toe");
-        gameFinish = false;
+        outcomeText.setText("Tic Tac Toe!");
+        gameFinish = false;  // Reset game state first
+        playerTurn = 0;
+
+        buttons.forEach(button -> {
+            button.setDisable(false);  // Enable all buttons
+            button.setText("");        // Clear text
+            button.setStyle(button.getStyle().replaceAll("; -fx-text-fill: #[0-9A-F]{6}", ""));
+            button.getStyleClass().removeAll("x-mark", "o-mark");
+        });
     }
 
     @FXML
@@ -104,27 +111,30 @@ public class HelloController implements Initializable {
         return;
     }
 
-    public void resetButton(Button button) {
-        button.setDisable(false);
-        button.setText(" ");
-
-    }
-
     public void setupButton(Button button) {
+        button.setOnMouseClicked(null);
         button.setOnMouseClicked(mouseEvent -> {
-            setPlayerSymbol(button);
-            button.setDisable(true);
-            checkGame();
+            if (!gameFinish && button.getText().isEmpty()) {  //  empty text check
+                setPlayerSymbol(button);
+                button.setDisable(true);
+                checkGame();
+            }
         });
 
     }
 
     public void setPlayerSymbol(Button button) {
         if (playerTurn % 2 == 0) {
+            outcomeText.setText("O turn!");
             button.setText("X");
+            button.setStyle(button.getStyle() + "; -fx-text-fill: #0000FF;");  // Blue for X
+            button.getStyleClass().add("x-mark");
             playerTurn = 1;
         } else {
+            outcomeText.setText("X turn!");
             button.setText("O");
+            button.setStyle(button.getStyle() + "; -fx-text-fill: #FF0000;");  // Red for O
+            button.getStyleClass().add("o-mark");
             playerTurn = 0;
             
         }
@@ -156,15 +166,32 @@ public class HelloController implements Initializable {
                 sb.updateScoreBoard(playerXName.getText());
                 sb.updateScoreboardLabels(false);
                 gameFinish = true;
+                buttons.forEach(button -> button.setDisable(true));
             } else if (line.equals("OOO")) {
                 outcomeText.setText("O wins!");
                 sb.updateScoreBoard(playerOName.getText());
                 sb.updateScoreboardLabels(false);
                 gameFinish = true;
+                buttons.forEach(button -> button.setDisable(true));
             }
 
         }
 
+        boolean draw = true;
+        for (Button button : buttons) {
+            String text = button.getText();
+            System.out.println("Button text: '" + text + "'");  // Add debug print
+            if (text.isEmpty() || text.equals("")) {
+                draw = false;
+                break;
+            }
+        }
+
+        if (draw) {
+            outcomeText.setText("Draw!");
+            gameFinish = true;
+            buttons.forEach(button -> button.setDisable(true));
+        }
 
     }
 
